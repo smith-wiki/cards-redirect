@@ -3,7 +3,7 @@
 Serves `cards.smith.wiki`, the first host of the Card site, and sends every
 visitor to [old.smith.wiki](https://old.smith.wiki) at the same path:
 `cards.smith.wiki/<id>/` → `old.smith.wiki/<id>/`. The Card site was later
-served at `andy.smith.wiki` (redirected by `smith-wiki/andy-redirect`) and now
+served at `andy.smith.wiki` (its URLs redirect via the `redirects` list of `smith-wiki/andy-smith-wiki`) and now
 lives at `old.smith.wiki`; this repository points straight there, not through
 `andy.smith.wiki`.
 
