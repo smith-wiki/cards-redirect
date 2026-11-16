@@ -1,8 +1,11 @@
 # cards-redirect
 
 Serves `cards.smith.wiki`, the first host of the Card site, and sends every
-visitor to [andy.smith.wiki](https://andy.smith.wiki) at the same path:
-`cards.smith.wiki/<id>/` → `andy.smith.wiki/<id>/`.
+visitor to [old.smith.wiki](https://old.smith.wiki) at the same path:
+`cards.smith.wiki/<id>/` → `old.smith.wiki/<id>/`. The Card site was later
+served at `andy.smith.wiki` (redirected by `smith-wiki/andy-redirect`) and now
+lives at `old.smith.wiki`; this repository points straight there, not through
+`andy.smith.wiki`.
 
 Published Cards and Bluesky posts link to the old host and can never be edited,
 so this repository must keep serving the domain.
@@ -15,9 +18,8 @@ so this repository must keep serving the domain.
 - `404.html` — any other path: redirects with `location.replace`, or to the
   home page without JavaScript.
 
-`generate.mjs` wrote the pages from a checkout of `smith-wiki/cards`
-(`node generate.mjs ../cards`). Cards created after the move link to
-andy.smith.wiki, so the set is complete and is not regenerated.
+`generate.mjs` writes the pages from a checkout of `smith-wiki/cards`
+(`node generate.mjs ../cards`).
 
 GitHub Pages (deploy from branch `main`, `/`), custom domain `cards.smith.wiki`,
 DNS `CNAME cards -> smith-wiki.github.io`.

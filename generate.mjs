@@ -1,17 +1,16 @@
 // Writes one redirect page per Card: <id>/index.html, served with 200.
 // Each page carries the Card's own title, description, and image, so link
-// previews of old cards.smith.wiki URLs still show the Card, and redirects to
-// its andy.smith.wiki page (JS keeps query and fragment; meta refresh without JS).
+// previews of old URLs still show the Card, and redirects to its
+// old.smith.wiki page (JS keeps query and fragment; meta refresh without JS).
 //
-// Only Cards created before the move have cards.smith.wiki URLs, so this runs
-// once against a checkout of smith-wiki/cards (with node_modules installed):
+// Runs against a checkout of smith-wiki/cards (with node_modules installed):
 //
 //   node generate.mjs ../cards
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const SITE = "https://andy.smith.wiki";
+const SITE = "https://old.smith.wiki";
 const cardsRepo = path.resolve(process.argv[2] ?? "../cards");
 const { articleDescription, loadCards, plainText } = await import(pathToFileURL(path.join(cardsRepo, "lib/cards.mjs")).href);
 
@@ -67,10 +66,10 @@ const home = {
   type: "website",
   image: null,
 };
-await writeFile("index.html", page({ ...home, target: `${SITE}/`, body: "This wiki moved to andy.smith.wiki." }));
+await writeFile("index.html", page({ ...home, target: `${SITE}/`, body: "This wiki moved to old.smith.wiki." }));
 await mkdir("all", { recursive: true });
 await writeFile(
   "all/index.html",
-  page({ ...home, title: "All Cards · Smith Wiki", description: "Every Card of the Smith Wiki, newest first.", target: `${SITE}/all/`, body: "This wiki moved to andy.smith.wiki." }),
+  page({ ...home, title: "All Cards · Smith Wiki", description: "Every Card of the Smith Wiki, newest first.", target: `${SITE}/all/`, body: "This wiki moved to old.smith.wiki." }),
 );
 console.log(`wrote ${cards.length} Card pages, index.html, all/index.html`);
